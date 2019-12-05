@@ -1,2 +1,2 @@
-# gosolaredge
-solaredge api usage lib for golang
+# goverisure
+verisure api lib for golang
