@@ -25,6 +25,7 @@ const (
 	urlLogin            = "%s/xbn/2/cookie"
 	urlGetInstallations = "%s/xbn/2/installation/search?email=%s"
 	urlGetOverview      = "%s/xbn/2/installation/%s/overview"
+	urlGetArmState      = "%s/xbn/2/installation/%s/armstate"
 )
 
 func New() *Handler {
@@ -56,9 +57,7 @@ func (h *Handler) Get(method, url string, args ...interface{}) ([]byte, error) {
 
 	if url == urlLogin {
 		req.Header.Add("Authorization", fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("CPE/%s:%s", h.username, h.password)))))
-	}
-
-	if h.cookie != nil {
+	} else if h.cookie != nil {
 		req.AddCookie(h.cookie)
 	}
 

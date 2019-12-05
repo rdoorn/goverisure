@@ -6,9 +6,11 @@ import (
 )
 
 type ArmState struct {
+	Cid        string    `json:"cid"`
 	StatusType string    `json:"statusType"`
 	Date       time.Time `json:"date"`
 	ChangedVia string    `json:"changedVia"`
+	Name       string    `json:"name"`
 }
 
 type ControlPlug struct {
