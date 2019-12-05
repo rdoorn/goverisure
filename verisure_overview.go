@@ -129,6 +129,15 @@ func (n DoorWindowDevice) String() string {
 	return string(b)
 }
 
+func (n ArmState) String() string {
+	b, err := json.Marshal(n)
+	if err != nil {
+		return err.Error()
+	}
+
+	return string(b)
+}
+
 func (h *Handler) Overview(installationID string) (Overview, error) {
 	o := Overview{}
 	data, err := h.Get("GET", urlGetOverview, h.apiURL, installationID)
