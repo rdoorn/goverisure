@@ -115,14 +115,32 @@ type Overview struct {
 	DoorWindow DoorWindow `json:"doorWindow"`
 }
 
-func (h *Handler) Overview(installationID string) ([]Installation, error) {
-	var i []Installation
-	data, err := h.Get("GET", urlGetInstallations, h.apiURL, installationID)
-
-	err = json.Unmarshal(data, i)
+func (n ClimateValue) String() string {
+	b, err := json.Marshal(n)
 	if err != nil {
-		return nil, err
+		return err.Error()
 	}
 
-	return i, nil
+	return string(b)
+}
+
+func (n DoorWindowDevice) String() string {
+	b, err := json.Marshal(n)
+	if err != nil {
+		return err.Error()
+	}
+
+	return string(b)
+}
+
+func (h *Handler) Overview(installationID string) (Overview, error) {
+	o := Overview{}
+	data, err := h.Get("GET", urlGetOverview, h.apiURL, installationID)
+
+	err = json.Unmarshal(data, &o)
+	if err != nil {
+		return Overview{}, err
+	}
+
+	return o, nil
 }
