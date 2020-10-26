@@ -18,7 +18,7 @@ type Handler struct {
 }
 
 var (
-	apiURL = "https://e-api02.verisure.com"
+	DefaultURL = "https://e-api01.verisure.com"
 )
 
 const (
@@ -37,6 +37,12 @@ func New() *Handler {
 	password, ok := os.LookupEnv("VERISURE_PASSWORD")
 	if !ok {
 		panic("missing environment key: VERISURE_PASSWORD")
+	}
+
+	apiURL, ok := os.LookupEnv("VERISURE_API")
+	if !ok {
+		apiURL = DefaultURL
+		//panic("missing environment key: VERISURE_API")
 	}
 
 	return &Handler{
